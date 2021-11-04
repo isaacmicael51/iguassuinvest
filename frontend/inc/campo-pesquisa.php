@@ -7,33 +7,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="../assets/css/custom.css">
 </head>
-<style>
-    .form_busca  {
-        width: 920.79px;
-        height: 68px;
-        border-radius: 22px;
-        background: transparent;
-        box-shadow: 0px 5px 11px rgba(0, 0, 0, 0.15);
-        margin-top: 2em;
-        /* Note: currently only Safari supports backdrop-filter */
-        backdrop-filter: blur(16.4960994720459px);
-        --webkit-backdrop-filter: blur(16.4960994720459px);
-        background-color: rgba(255, 255, 255, 0.12);
-
-
-    }
-    .form_busca__inputs{
-        width: 214.26px;
-        height: 40px;
-        border-radius: 6px;
-        background: #fff;
-        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-        border: none!important;
-        padding: 6px;
-        margin: 0.8em 1em;
-    }
-</style>
 <body>
 
 <?php require '../../backend/cidadesDisponiveis/cidadesDisponiveis.php';?> 

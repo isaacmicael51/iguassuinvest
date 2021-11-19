@@ -21,10 +21,10 @@ require '../../backend/imoveisDisponiveis/index.php';
         echo "<div class='container'>";
         echo "<button type='button' data-filter='all'>All</button>";
 
-        include '../inc/todosTiposImoveis.php';
+        include '../inc/filtroConsulta.php';
         echo "<div class='row'>";
        
-        foreach ($full_response->lista as $lista) {
+        foreach ($response->lista as $lista) {
 
             echo "<div class='col-4 mt-4 padding-0 mix tipo-$lista->codigotipo' data-order='1'>";
             echo "  <div class='card-imoveis'>";

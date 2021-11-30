@@ -1,11 +1,9 @@
 <?php
 // include '../backend/chave.php';
-$cidade = $_GET['cidade'];
-if ($cidade == null || ''){
-  $cidade = 1;
-}
+// require '../../backend/condominiosDisponiveis/index.php';
+// var_dump($responseCondominios);
 
-echo "cidade aqui" . $cidade;
+
 
 
 
@@ -46,20 +44,20 @@ $chCondominios = curl_init();
         ) , 
     ));
 
-    curl_setopt_array($chCondominios, array(
-        CURLOPT_URL => 'https://api.imoview.com.br/Imovel/RetornarCondominiosDisponiveis?parametros={"codigocidade":"' . $cidade . '"}',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
+    // curl_setopt_array($chCondominios, array(
+    //     CURLOPT_URL => 'https://api.imoview.com.br/Imovel/RetornarCondominiosDisponiveis?parametros={"codigocidade":"' . $cidade . '"}',
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'GET',
 
-        CURLOPT_HTTPHEADER => array(
-          'chave: wSK7Jlc7sQfuJ5Gx8/3v61ce5zEqL2vNNzZ8cHert2E='
-        ) , 
-    ));
+    //     CURLOPT_HTTPHEADER => array(
+    //       'chave: wSK7Jlc7sQfuJ5Gx8/3v61ce5zEqL2vNNzZ8cHert2E='
+    //     ) , 
+    // ));
 
 
     // curl_setopt_array($ch4, array(
@@ -121,7 +119,7 @@ $chCondominios = curl_init();
     //close the handles
     curl_multi_remove_handle($mh, $chTipos);
     curl_multi_remove_handle($mh, $chCidades);
-    curl_multi_remove_handle($mh, $chCondominios);
+    // curl_multi_remove_handle($mh, $chCondominios);
     // curl_multi_remove_handle($mh, $ch4);
     // curl_multi_remove_handle($mh, $ch5);
     curl_multi_close($mh);
@@ -129,15 +127,15 @@ $chCondominios = curl_init();
     // all of our requests are done, we can now access the results
     $responseTipos   = json_decode(curl_multi_getcontent($chTipos));
     $responseCidades = json_decode(curl_multi_getcontent($chCidades));
-    $responseCondominios = json_decode(curl_multi_getcontent($chCondominios));
+    // $responseCondominios = json_decode(curl_multi_getcontent($chCondominios));
     // $response_4 = curl_multi_getcontent($ch4);
     // $response_5 = curl_multi_getcontent($ch5);
 
 
+    // var_dump($responseCidades);
 
 
-
-echo "<form role='form' action='index.php' method='get'>";
+echo "<form role='form' action='./todosOsImoveis/index.php' method='get'>";
  
   echo "<select name='cidade' id='cidade'>";
   echo "<option value=''>Selecione a cidade</option>";
@@ -153,12 +151,7 @@ echo "<form role='form' action='index.php' method='get'>";
     };
   echo "</select>";
 
-  echo "<select name='condominio' id='cidade'>";
-  echo "<option>Selecione o condominio</option>";
-    foreach ($responseCondominios->lista as $lista) {
-      echo "<option value='$lista->codigo'>$lista->nome</option>";
-    };
-  echo "</select>";
+  
   echo "<button>pesquisar</button>";
   echo "</form>";
   

@@ -74,24 +74,168 @@ somentecomurlpublica: OPCIONAL - Enviar true ou fals -->
 
 
 <?php
-require '../../backend/chave.php';
-
-$cidade = $_GET['cidade'];
-$tipoImovel = $_GET['tipoImovel'];
-$codCondominio = $_GET['condominio'];
-$pagina = $_GET["pagina"];
+require '../backend/chave.php';
+// pega os paramentros na url
+$cidade = isset($_GET['cidade']);
+$tipoImovel = isset($_GET['tipoImovel']);
+// $codCondominio = isset($_GET['condominio']);
+$pagina = isset($_GET["pagina"]);
 if ($pagina == null || ''){
     $pagina = 1;
 }
 
 
 
-// create both cURL resources
-$ch1 = curl_init();
+$chTipos   = curl_init();
+$chCidades = curl_init();
+// $chCondominios = curl_init();
+// $ch4 = curl_init();
+// $ch5 = curl_init();
 
 
-    $url = 'https://api.imoview.com.br/Imovel/RetornarImoveisDisponiveis?parametros={"finalidade":"2","numeroPagina":"' . $pagina . '","codigocidade":"' . $cidade . '","codigocondominio":"' . $codCondominio . '","numeroRegistros":"20","retornarRange":"true"}';
-    curl_setopt_array($ch1, array(
+    curl_setopt_array($chTipos, array(
+        CURLOPT_URL => 'https://api.imoview.com.br/Imovel/RetornarTiposImoveisDisponiveis',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+
+        CURLOPT_HTTPHEADER => array(
+            'chave: wSK7Jlc7sQfuJ5Gx8/3v61ce5zEqL2vNNzZ8cHert2E='
+        ) ,
+    ));
+
+    curl_setopt_array($chCidades, array(
+        CURLOPT_URL => 'https://api.imoview.com.br/Imovel/RetornarCidadesDisponiveis',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+
+        CURLOPT_HTTPHEADER => array(
+            'chave: wSK7Jlc7sQfuJ5Gx8/3v61ce5zEqL2vNNzZ8cHert2E='
+        ) , 
+    ));
+
+    // curl_setopt_array($chCondominios, array(
+    //     CURLOPT_URL => 'https://api.imoview.com.br/Imovel/RetornarCondominiosDisponiveis?parametros={"codigocidade":"' . $cidade . '"}',
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'GET',
+
+    //     CURLOPT_HTTPHEADER => array(
+    //       'chave: wSK7Jlc7sQfuJ5Gx8/3v61ce5zEqL2vNNzZ8cHert2E='
+    //     ) , 
+    // ));
+
+
+    // curl_setopt_array($ch4, array(
+    //     CURLOPT_URL => 'https://api.imoview.com.br/Imovel/RetornarImoveisDisponiveis?parametros={"finalidade":"4","numeroPagina":"2","numeroRegistros":"20","retornarRange":"true"}',
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'GET',
+
+    //     CURLOPT_HTTPHEADER => array(
+    //         'chave', $chave
+    //     ) , 
+    // ));
+
+
+    // curl_setopt_array($ch5, array(
+    //     CURLOPT_URL => 'https://api.imoview.com.br/Imovel/RetornarImoveisDisponiveis?parametros={"finalidade":"5","numeroPagina":"2","numeroRegistros":"20","retornarRange":"true"}',
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'GET',
+
+    //     CURLOPT_HTTPHEADER => array(
+    //         'chave', $chave
+    //     ) , 
+    // ));
+
+
+
+
+
+    //create the multiple cURL handle
+    $mh = curl_multi_init();
+
+    //add the two handles
+    curl_multi_add_handle($mh, $chTipos);
+    curl_multi_add_handle($mh, $chCidades);
+    // curl_multi_add_handle($mh, $chCondominios);
+    // curl_multi_add_handle($mh, $ch4);
+    // curl_multi_add_handle($mh, $ch5);
+
+    //execute the multi handle
+    do
+    {
+        $status = curl_multi_exec($mh, $active);
+        if ($active)
+        {
+            curl_multi_select($mh);
+        }
+    }
+    while ($active && $status == CURLM_OK);
+
+    //close the handles
+    curl_multi_remove_handle($mh, $chTipos);
+    curl_multi_remove_handle($mh, $chCidades);
+    // curl_multi_remove_handle($mh, $chCondominios);
+    // curl_multi_remove_handle($mh, $ch4);
+    // curl_multi_remove_handle($mh, $ch5);
+    curl_multi_close($mh);
+
+    // all of our requests are done, we can now access the results
+    $responseTipos   = json_decode(curl_multi_getcontent($chTipos));
+    $responseCidades = json_decode(curl_multi_getcontent($chCidades));
+    // $responseCondominios = json_decode(curl_multi_getcontent($chCondominios));
+    // $response_4 = curl_multi_getcontent($ch4);
+    // $response_5 = curl_multi_getcontent($ch5);
+
+    // var_dump($responseCidades);
+
+
+// get todos os imoveis
+$chTodosImoveis = curl_init();
+$chTodosImoveis2 = curl_init();
+$chTodosImoveis3 = curl_init();
+
+    $url = 'https://api.imoview.com.br/Imovel/RetornarImoveisDisponiveis?parametros={"finalidade":"2","numeroPagina":"1","codigocidade":"' . $cidade  . '","numeroRegistros":"20","retornarRange":"true"}';
+    curl_setopt_array($chTodosImoveis, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+
+        CURLOPT_HTTPHEADER => array(
+            'chave', $chave
+        ) ,
+    ));
+    
+    $url = 'https://api.imoview.com.br/Imovel/RetornarImoveisDisponiveis?parametros={"finalidade":"2","numeroPagina":"2","codigocidade":"' . $cidade  . '","numeroRegistros":"20","retornarRange":"true"}';
+    curl_setopt_array($chTodosImoveis2, array(
         CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
@@ -106,21 +250,70 @@ $ch1 = curl_init();
         ) ,
     ));
 
+    $url = 'https://api.imoview.com.br/Imovel/RetornarImoveisDisponiveis?parametros={"finalidade":"2","numeroPagina":"3","codigocidade":"' . $cidade  . '","numeroRegistros":"20","retornarRange":"true"}';
+    curl_setopt_array($chTodosImoveis3, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+
+        CURLOPT_HTTPHEADER => array(
+            'chave', $chave
+        ) ,
+    ));
+
+
+
+
+    //create the multiple cURL handle
+    $mh = curl_multi_init();
+
+    //add the two handles
+    curl_multi_add_handle($mh, $chTodosImoveis);
+    curl_multi_add_handle($mh, $chTodosImoveis2);
+    curl_multi_add_handle($mh, $chTodosImoveis3);
+
+    //execute the multi handle
+    do
+    {
+        $status = curl_multi_exec($mh, $active);
+        if ($active)
+        {
+            curl_multi_select($mh);
+        }
+    }
+    while ($active && $status == CURLM_OK);
+
+    //close the handles
+    curl_multi_remove_handle($mh, $chTodosImoveis);
+    curl_multi_remove_handle($mh, $chTodosImoveis2);
+    curl_multi_remove_handle($mh, $chTodosImoveis3);
+
+    curl_multi_close($mh);
+
+    // all of our requests are done, we can now access the results
+    $responseTodosOsImoveis   = json_decode(curl_multi_getcontent($chTodosImoveis));
+    $responseTodosOsImoveis2 = json_decode(curl_multi_getcontent($chTodosImoveis2));
+    $responseTodosOsImoveis3 = json_decode(curl_multi_getcontent($chTodosImoveis3));
+
+
+
+    // var_dump($responseCidades);
+
  echo $url;
+ $responseTodosOsImoveis = json_decode(curl_exec($chTodosImoveis));
+ $responseTodosOsImoveis = json_decode(curl_exec($chTodosImoveis2));
+ $responseTodosOsImoveis = json_decode(curl_exec($chTodosImoveis3));
 
+ $obj_merged = (object) array_merge((array) $responseTodosOsImoveis, (array) $responseTodosOsImoveis2);
 
+ curl_close($chTodosImoveis);
+ curl_close($chTodosImoveis2);
+ curl_close($chTodosImoveis3);
 
-
-    $response = json_decode(curl_exec($ch1));
-
-
-
-
-    // var_dump($response);
-
-
-    // echo $full_response;
-
-    curl_close($ch1);
-
-
+//  var_dump($obj_merged);
+ 

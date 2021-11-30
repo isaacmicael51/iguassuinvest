@@ -1,9 +1,8 @@
 <?php
-$cidade = 1;
 $chCondominios = curl_init();
 
 curl_setopt_array($chCondominios, array(
-  CURLOPT_URL => 'https://api.imoview.com.br/Imovel/RetornarCondominiosDisponiveis?parametros={"codigocidade":"' . $cidade . '"}',
+  CURLOPT_URL => 'https://api.imoview.com.br/Imovel/RetornarCondominiosDisponiveis',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -17,8 +16,12 @@ curl_setopt_array($chCondominios, array(
   ) , 
 ));
 
-$response = curl_exec($chCondominios);
+$responseCondominios = curl_exec($chCondominios);
 
 curl_close($chCondominios);
-echo $response;
+json_decode($responseCondominios);
+// echo ($responseCondominios);
 
+// foreach ($responseCondominios->lista as $lista) {
+//   echo $lista->codigo;
+// };

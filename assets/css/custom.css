@@ -23,13 +23,11 @@
     padding: 6px;
     margin: 0.8em 1em;
 }
-
-
 /* página todos os imoveis */
 
 .card-imoveis {
     width: 100%;
-    height: 420px;
+    height: 440px;
     border-radius: 16px;
     border: 1px solid #EBEBEB;
 }
@@ -89,3 +87,21 @@
     margin: 0 0 0 8px;
     width: 50%
 }
+.hero {
+    background-image: url(../img/hero-site.png);
+    background-size: cover;
+    width: 100%;
+    height: 600px;
+
+}
+.bg-search{
+        width: 920.79px;
+        height: 68px;
+        border-radius: 22px;
+        background: transparent;
+        box-shadow: 0px 5px 11px rgba(0, 0, 0, 0.15);
+        /* Note: currently only Safari supports backdrop-filter */
+        backdrop-filter: blur(16.4960994720459px);
+        --webkit-backdrop-filter: blur(16.4960994720459px);
+        background-color: rgba(255, 255, 255, 0.12);
+    }

@@ -1,27 +1,26 @@
 
-
-<?php
-require '../../backend/imoveisDisponiveis/index.php';
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todos os imoveis</title>
+    <title>Iguassu Invest</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/custom.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
 </head>
 <body>     
-<?php
-        include '../inc/header.php';
-        echo "<div class='container'>";
-        echo "<button type='button' data-filter='all'>All</button>";
+    <?php include './inc/header.php'; ?>
+    
+    <div class="hero"></div>
 
-        include '../inc/filtroConsulta.php';
+<?php
+        echo "<div class='container'>";
+
+
+        include './inc/filtroConsultaHome.php';
         echo "<div class='row'>";
        
         foreach ($response->lista as $lista) {

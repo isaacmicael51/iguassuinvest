@@ -1,3 +1,26 @@
+/* elementos - Todas as customizações de elementos do html */
+a {
+    color: #222222;
+}
+a:link {
+    color: #222222;
+}
+a:hover {
+    color: #ff385c;
+}
+/* --- fim elementos */
+/* bootstrap classes - Todas as customizações de classes do bootstrap*/
+.page-link {
+    color: #222222;
+}
+.page-link:hover {
+    color: #ff385c;
+}
+/* --- bootstrap classes */
+
+
+
+
 /* Página home */
 .form_busca  {
     width: 920.79px;
@@ -104,4 +127,10 @@
         backdrop-filter: blur(16.4960994720459px);
         --webkit-backdrop-filter: blur(16.4960994720459px);
         background-color: rgba(255, 255, 255, 0.12);
+    }
+    .pagination {
+        justify-content: center;
+        flex-direction: row;
+        padding: 1em 0;
+        color: #222222;
     }

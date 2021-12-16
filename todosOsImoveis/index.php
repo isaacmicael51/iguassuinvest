@@ -1,7 +1,7 @@
 
 
 <?php
-require '../backend/imoveisDisponiveis/index.php';
+require '../backend/imoveisDisponiveis/imoveisDisponiveis.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +11,7 @@ require '../backend/imoveisDisponiveis/index.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todos os imoveis</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="../assets/css/custom.css">
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <?php include '../inc/scripts-includes.php';?>
 </head>
 <body>     
     <?php include '../inc/header.php'; ?>
@@ -31,7 +29,7 @@ require '../backend/imoveisDisponiveis/index.php';
        
         echo "<div class='row'>";
 
-        foreach ($obj_merged->lista as $lista) {
+        foreach ($responseTodosOsImoveis->lista as $lista) {
 
             echo "<div class='mix tipo-$lista->codigotipo col-4 mt-4 padding-0  ' data-order='1'>";
             echo "  <div class='card-imoveis'>";
@@ -58,14 +56,14 @@ require '../backend/imoveisDisponiveis/index.php';
         echo "</div>";
 
 
-                $quantidade = $obj_merged->quantidade;
+                $quantidade = $responseTodosOsImoveis->quantidade;
                 $totalDePaginas = $quantidade / 20;    
                 $nPage =  1;
             ?>
         <div class="col-12 ">
             <ul class="pagination ">
             <?php while($nPage < $totalDePaginas){
-                    echo "<li class='page-item'><a class='page-link' href='#'>" . (int)  $nPage . "</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='index.php?cidade=1&pagina=" . $nPage .  "'>" . (int)  $nPage . "</a></li>";
                     $nPage ++;
                 }?>
             </ul>

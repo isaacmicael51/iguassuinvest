@@ -134,3 +134,11 @@ a:hover {
         padding: 1em 0;
         color: #222222;
     }
+
+    .carousel-1 {
+        width: 100%;
+        height: auto;
+        margin-right: 5px;
+        border-radius:20px;
+    
+      }

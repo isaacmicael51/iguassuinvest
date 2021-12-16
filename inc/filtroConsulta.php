@@ -14,7 +14,10 @@
   $itapema = 29;
   $cascavel = 5;
   $sti = 3;
-  $curitiba =9;
+  $curitiba = 9;
+  if ($cidadeSelecionada == '') {
+    $cidadeSelecionada = 1;
+  }
 
 //  
 echo "<form role='form' action='index.php' method='get'>";
@@ -27,12 +30,12 @@ echo "<h2>Para fazer sua busca, primeiro selecione a cidade</h2>";
     };
   echo "</select>";
   
-  // echo "<select name='tipoImovel' id='tipos'>";
-  // echo "<option value=''>Selecione o tipo de imóvel</option>";
-  //   foreach ($responseTipos->lista as $lista) {
-  //     echo "<option value='$lista->codigo'>$lista->nome</option>";
-  //   };
-  // echo "</select>";
+  echo "<select name='tipoImovel' id='tipos'>";
+  echo "<option value=''>Selecione o tipo de imóvel</option>";
+    foreach ($responseTipos->lista as $lista) {
+      echo "<option value='$lista->codigo'>$lista->nome</option>";
+    };
+  echo "</select>";
   echo "<button>pesquisar</button>";
   echo "</form>";
 

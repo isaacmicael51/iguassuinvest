@@ -12,4 +12,10 @@ class HomeController extends Controller
         $headers = ['category' => 'PAINEL', 'title' => 'PAINEL'];
         return view('index', compact('headers'));
     }
+
+    public function busca()
+    {
+        $headers = ['category' => 'PAINEL', 'title' => 'PAINEL'];
+        return view('welcome', compact('headers'));
+    }
 }

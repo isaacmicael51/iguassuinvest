@@ -19,3 +19,5 @@ Route::get('/welcome', function () {
 });
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/busca', [HomeController::class, 'busca']);
+Route::get('imoveisDisponiveis/{codigoTipo?}', [ImoveisDisponiveisController::class, 'index']);

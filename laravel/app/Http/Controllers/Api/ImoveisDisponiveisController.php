@@ -11,7 +11,7 @@ class ImoveisDisponiveisController extends Controller
     public  $chave = '';
     public function __construct()
     {
-        $this->chave = env('KEY_IMOVEL');
+        $this->chave = 'wSK7Jlc7sQfuJ5Gx8/3v61ce5zEqL2vNNzZ8cHert2E=';
     }
 
     public function filtros($codigoTipo, $var2)

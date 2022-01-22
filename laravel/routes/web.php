@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\QuemsomosController;
+use App\Http\Controllers\Site\BuscaImoveisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +16,10 @@ use App\Http\Controllers\Site\HomeController;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/busca', [HomeController::class, 'busca']);
+
+
+Route::get('/quemsomos', [QuemSomosController::class, 'index']);
+Route::get('/buscaimoveis', [BuscaImoveisController::class, 'index']);
 Route::get('imoveisDisponiveis/{codigoTipo?}', [ImoveisDisponiveisController::class, 'index']);

@@ -1,25 +1,24 @@
-<header>
-    
-    <nav class="navbar fixed-top navbar-expand-lg navbar-transparent"> <a class="navbar-brand" href="#">SPORT SHOES</a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"> <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a> </li>
-                <li class="nav-item"> <a class="nav-link" href="#">MEN</a> </li>
-                <li class="nav-item"> <a class="nav-link" href="#">WOMEN</a> </li>
-                <li class="nav-item"> <a class="nav-link" href="#">KIDS</a> </li>
-                <li class="nav-item"> <a class="nav-link" href="#">BOYS</a> </li>
-                <li class="nav-item"> <a class="nav-link" href="#">GIRLS</a> </li>
-            </ul>
-        </div>
-    </nav> <!-- ./ end of navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 left-side"> <img src="https://i.imgur.com/jrRBTai.png" class="w-100"> </div>
-            <div class="col-md-6 right-side">
-                <h1>SPORTS SHOES</h1>
-                <p>FREE DELIVERY</p>
-                <div class="text-center"> <button class="btn order-button">ORDER NOW</button> </div>
-            </div>
-        </div>
+    <a class="navbar-brand" href="#"><img src="images/logo.svg" alt=""></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Buscar Imóveis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">A Empresa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Fale conosco</a>
+        </li> 
+      </ul>
     </div>
-</header>
+    </div>
+  </nav>
